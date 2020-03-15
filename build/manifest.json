@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
   "name": "FAP-GPA",
+  "icons": { "16": "./icon.png", "32": "./icon.png", "48": "./icon.png", "128": "./icon.png" },
   "version": "1.0.0",
   "content_scripts": [
     {
       "matches": ["http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"],
-      "js": ["bundle.js"],
-      "start": "end"
+      "js": ["bundle.js"]
     }
   ]
 }

@@ -1,14 +1,24 @@
-const $ = require('jquery');
-const _ = require('lodash');
+const transcript = $("#ctl00_mainContent_divGrade table:first tbody tr")
+  .toArray()
+  .map((row) => ({
+    credit: +$(row).find("td")[7].innerText,
+    grade: +$(row).find("td")[8].innerText,
+  }))
+  .filter((row) => row.grade > 0 && row.credit > 0)
+  .reduce(
+  (acc, row) => {
+    acc.totalCredit += row.credit;
+    acc.totalScore += row.credit * row.grade;
 
-const mainContent = $('#ctl00_mainContent_lblRollNumber')
-const gradeRows = $('#ctl00_mainContent_divGrade table:first tbody tr')
-let gradeScores = []
+    return acc;
+  },
+  {
+    totalCredit: 0,
+    totalScore: 0,
+  }
+);
 
-for (let i = 0; i < gradeRows.length; i++) {
-    gradeScores.push($(gradeRows[i]).find('td')[8].innerText)
-}
+const currentGpa = (transcript.totalScore / transcript.totalCredit).toFixed(2);
 
-const avgScore = _.mean(gradeScores.filter(x => x != '' && x != '0').map(x => +x))
-
-mainContent.append(` - <span class="label label-success">GPA: ${avgScore.toFixed(2)}</span>`)
+// Write GPA to page
+$("#ctl00_mainContent_lblRollNumber").append(` - <span class="label label-success">GPA: ${currentGpa}</span>`)

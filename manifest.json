@@ -2,12 +2,21 @@
   "manifest_version": 2,
   "description": "Extension for calculating FAP-GPA",
   "name": "FAP-GPA",
-  "icons": { "16": "./icon.png", "32": "./icon.png", "48": "./icon.png", "128": "./icon.png" },
-  "version": "1.0.1",
+  "icons": {
+    "16": "./icon.png",
+    "32": "./icon.png",
+    "48": "./icon.png",
+    "128": "./icon.png"
+  },
+  "version": "1.0.2",
   "content_scripts": [
     {
-      "matches": ["http://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"],
-      "js": ["script.js"]
+      "matches": [
+        "*://fap.fpt.edu.vn/Grade/StudentTranscript.aspx"
+      ],
+      "js": [
+        "script.js"
+      ]
     }
   ]
 }
